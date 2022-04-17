@@ -55,14 +55,14 @@
     }
     #GoogleSearchButtonDiv {
         margin-top: 10px;
-        align-items: center;
-        margin-left: 33%;
+        display: block;
+        margin-left: calc(50% - 85px);
     }
     #GoogleSearchButton {
-        width: 140px;
+        width: 170px;
         height: 30px;
-        background-color: #4d90fe;
         text-align: center;
+        background-color: #4d90fe;
         border: none;
         border-radius: 5px;
         padding: 5px;
@@ -78,8 +78,7 @@
     </head>
     <body>
         <div id="links">
-            <a href="images.html"><input id="LinksButton" type="button" value="Images"></a>
-            <input type="button" value="Advanced Search">
+            <a href="index.html"><input id="LinksButton" type="button" value="Google Search"></a>
         </div>
         <div id="EmptyDiv">
         </div>
@@ -87,11 +86,11 @@
             <div id="SearchBarDiv">
                 <div id="SearchBar">
                     <div id="SearchInputDiv">
-                        <input id="SearchInput" type="text" name="q" placeholder="Search Google">
+                        <input id="SearchInput" type="text" name="q" placeholder="Search Google Images">
                     </div>
                     <div id="GoogleSearchButtonDiv">
-                        <input id="GoogleSearchButton" name="btnK" type="submit" value="Google Search">
-                        <input id="GoogleSearchButton" name="btnI" type="submit" value="I'm Feeling Lucky">
+                        <input id="GoogleSearchButton" type="submit" value="Google Image Search">
+                        <input name="tbm" type="hidden" value="isch">
                     </div>
                 </div>
             </div>
