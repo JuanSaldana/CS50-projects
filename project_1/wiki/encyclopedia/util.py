@@ -34,6 +34,9 @@ def get_entry(title):
         f = default_storage.open(f"entries/{title}.md")
         return f.read().decode("utf-8")
     except FileNotFoundError:
+        f = default_storage.open("entries/error/NOTFOUND.md")
+        return f.read().decode("utf-8")
+
 
 def render_entry(title):
     """
