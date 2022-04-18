@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<style>
+  #links {
+    padding-top: 20px;
+    display: flex;
+    justify-content: end;
+  }
+  #LinksButton {
+    background-color: #4d90fe;
+    border: none;
+    color: white;
+    margin: 2px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7px;
+    border: none;
+    border-radius: 3px;
+  }
+  #EmptyDiv {
+    max-height: 400px;
+    height: 200px;
+    height: calc(100%-350px);
+  }
+  #SearchBarDiv {
+    display: block;
+  }
+  #SearchBar {
+    display: block;
+    margin: auto;
+    width: 50%;
+    max-width: 750px;
+    height: 100%;
+  }
+  #SearchInputDiv {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 400 px;
+  }
+  #SearchInput {
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+  #SearchInput:focus {
+    outline: none;
+    box-shadow: 2px 3px 1px 1px #ccc;
+  }
+  #GoogleSearchButtonDiv {
+    margin-top: 10px;
+    display: block;
+    margin-left: calc(50% - 85px);
+  }
+  #GoogleSearchButton {
+    width: 170px;
+    height: 30px;
+    text-align: center;
+    background-color: #4d90fe;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  #AdvancedSearchInputDiv {
+    display: flex;
+    margin: 10px;
+  }
+
+  #AdvancedSearchLabelBox {
+    margin: 10px;
+    width: 140px;
+    overflow-wrap: break-word;
+  }
+  #AdvancedSearchLabel {
+    font-family: arial, sans-serif;
+    color: #222;
+  }
+</style>
+
+<html lang="en">
+  <head>
+    <title>Google Advanced Search</title>
+  </head>
+  <body>
+    <div id="links">
+      <a href="index.html"
+        ><input id="LinksButton" type="button" value="Google Search"
+      /></a>
+    </div>
+    <div id="EmptyDiv"></div>
+    <form action="https://www.google.com/search">
+      <!-- https://www.google.com.mx/search?as_q=uno&as_epq=dos&as_oq=tres&as_eq=cuatro -->
+      <div id="SearchBarDiv">
+        <div id="SearchBar">
+          <div id="SearchInputDiv">
+            <div id="AdvancedSearchInputDiv">
+              <box id="AdvancedSearchLabelBox">
+                <label id="AdvancedSearchLabel"> All these words </label>
+              </box>
+              <input
+                id="SearchInput"
+                type="text"
+                name="as_q"
+                placeholder="Google Advanced Search"
+              />
+            </div>
+            <div id="AdvancedSearchInputDiv">
+              <box id="AdvancedSearchLabelBox">
+                <label id="AdvancedSearchLabel">
+                  These exact words or phrases
+                </label>
+              </box>
+              <input
+                id="SearchInput"
+                type="text"
+                name="as_epq"
+                placeholder="Google Advanced Search"
+              />
+            </div>
+            <div id="AdvancedSearchInputDiv">
+              <box id="AdvancedSearchLabelBox">
+                <label id="AdvancedSearchLabel"> Either of these words </label>
+              </box>
+              <input
+                id="SearchInput"
+                type="text"
+                name="as_oq"
+                placeholder="Google Advanced Search"
+              />
+            </div>
+            <div id="AdvancedSearchInputDiv">
+              <box id="AdvancedSearchLabelBox">
+                <label id="AdvancedSearchLabel"> None of these words</label>
+              </box>
+              <input
+                id="SearchInput"
+                type="text"
+                name="as_eq"
+                placeholder="Google Advanced Search"
+              />
+            </div>
+          </div>
+          <div id="GoogleSearchButtonDiv">
+            <input
+              id="GoogleSearchButton"
+              type="submit"
+              value="Google Advanced Search"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<style>
+  #links {
+    padding-top: 20px;
+    display: flex;
+    justify-content: end;
+  }
+  #LinksButton {
+    background-color: #4d90fe;
+    border: none;
+    color: white;
+    margin: 2px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 7px;
+    border: none;
+    border-radius: 3px;
+  }
+  #EmptyDiv {
+    max-height: 400px;
+    height: 400px;
+    height: calc(100%-350px);
+  }
+  #SearchBarDiv {
+    display: block;
+  }
+  #SearchBar {
+    display: block;
+    margin: auto;
+    width: 50%;
+    max-width: 750px;
+    height: 100%;
+  }
+  #SearchInputDiv {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    height: 100 px;
+  }
+  #SearchInput {
+    width: 100%;
+    height: 50%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+  #SearchInput:focus {
+    outline: none;
+    box-shadow: 2px 3px 1px 1px #ccc;
+  }
+  #GoogleSearchButtonDiv {
+    margin-top: 10px;
+    align-items: center;
+    margin-left: 33%;
+  }
+  #GoogleSearchButton {
+    width: 140px;
+    height: 30px;
+    background-color: #4d90fe;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+  }
+</style>
+
+<html lang="en">
+  <head>
+    <title>Google Search</title>
+  </head>
+  <body>
+    <div id="links">
+      <a href="images.html"
+        ><input id="LinksButton" type="button" value="Images"
+      /></a>
+      <a href="advanced_search.html"
+        ><input id="LinksButton" type="button" value="Advanced Search"
+      /></a>
+    </div>
+    <div id="EmptyDiv"></div>
+    <form action="https://www.google.com/search">
+      <div id="SearchBarDiv">
+        <div id="SearchBar">
+          <div id="SearchInputDiv">
+            <input
+              id="SearchInput"
+              type="text"
+              name="q"
+              placeholder="Search Google"
+            />
+          </div>
+          <div id="GoogleSearchButtonDiv">
+            <input
+              id="GoogleSearchButton"
+              name="btnK"
+              type="submit"
+              value="Google Search"
+            />
+            <input
+              id="GoogleSearchButton"
+              name="btnI"
+              type="submit"
+              value="I'm Feeling Lucky"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
