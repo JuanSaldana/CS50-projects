@@ -46,3 +46,17 @@ def render_entry(title):
     # if entry is None:
     #     return open("encyclopedia/templates/encyclopedia/notfound.html").read()
     return markdown2.markdown(entry)
+
+
+def search_entry(title: str):
+    """
+    Searches for an entry in the encyclopedia.
+    """
+    entries = list_entries()
+    matching_entries = [
+        entry for entry in entries if title.lower() in entry.lower()] or None
+
+    if matching_entries and title in matching_entries:
+        return title
+    else:
+        return matching_entries
