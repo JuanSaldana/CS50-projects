@@ -1,5 +1,6 @@
 from typing import Type
 from django.shortcuts import render
+from random import choice
 
 from . import util
 
@@ -48,3 +49,8 @@ def edit_entry(request, entry_name):
     entry = util.get_entry(entry_name, default=False)
     if entry:
         return render(request, "encyclopedia/create_entry.html", {"entry": entry, "entry_name": entry_name, "state": "OLD"})
+
+
+def random_page(request):
+    entries = util.list_entries()
+    return entry(request, choice(entries))
