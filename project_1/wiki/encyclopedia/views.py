@@ -27,3 +27,17 @@ def search_results(request):
         return entry(request, results)
     else:
         return entry(request, query)
+
+
+def create_entry(request, entry={"title": "", "content": ""}, error=""):
+    return render(request, "encyclopedia/create_entry.html", {"entry": entry, "error": error})
+
+
+def save_entry(request):
+    title = request.GET.get("title")
+    content = request.GET.get("content")
+    if util.get_entry(title, default=False):
+        return render(request, "encyclopedia/entry.html", {"entry": util.render_entry("error/COPY")})
+    else:
+        util.save_entry(title, content)
+        return entry(request, title)

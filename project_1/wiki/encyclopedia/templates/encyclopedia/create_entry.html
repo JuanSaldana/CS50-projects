@@ -1,0 +1,60 @@
+﻿{% extends "encyclopedia/layout.html" %} } {% block title %} Enclyclopedia
+{%endblock%} {% block body %}
+
+<style>
+  #EntrySubmit {
+    display: block;
+  }
+  #EntryTitle {
+    display: flex;
+    width: 80%;
+  }
+
+  #SubmitButton {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #EntryTitle {
+    overflow: hidden;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+  #EntryContent {
+    overflow: hidden;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+</style>
+<form action={% url "save_entry"%}>
+  <div id="EntryTitle">
+    {% if error %}
+    <input
+      id="EntryTitle"
+      type="text"
+      name="title"
+      placeholder="Title already exists :( Please try again"
+      value="{{ entry.title }}"
+    />
+    {% else%}
+    <input
+      id="EntryTitle"
+      type="text"
+      name="title"
+      placeholder="Enter entry title"
+      value="{{ entry.title }}"
+    />
+    {% endif%}
+    <input id="SubmitButton" type="submit" id="EntrySubmit" value="Submit" />
+  </div>
+  <textarea
+    id="EntryContent"
+    name="content"
+    placeholder="Enter entry content"
+    value="{{ entry.content }}"
+  ></textarea>
+</form>
+{%endblock%}
