@@ -12,6 +12,7 @@ def index(request):
 
 def entry(request, entry_name):
     return render(request, "encyclopedia/entry.html", {
+        "entry_name": entry_name,
         "entry": util.render_entry(entry_name),
     })
 
@@ -41,3 +42,9 @@ def save_entry(request):
     else:
         util.save_entry(title, content)
         return entry(request, title)
+
+
+def edit_entry(request, entry_name):
+    entry = util.get_entry(entry_name, default=False)
+    if entry:
+        return render(request, "encyclopedia/create_entry.html", {"entry": entry, "entry_name": entry_name})
