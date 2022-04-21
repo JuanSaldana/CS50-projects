@@ -30,14 +30,14 @@ def search_results(request):
         return entry(request, query)
 
 
-def create_entry(request, entry={"title": "", "content": ""}, error=""):
-    return render(request, "encyclopedia/create_entry.html", {"entry": entry, "error": error})
+def create_entry(request, entry_name="", entry="", error=""):
+    return render(request, "encyclopedia/create_entry.html", {"entry_name": entry_name, "entry": entry, "error": error, "state": "NEW"})
 
 
-def save_entry(request):
+def save_entry(request, state="NEW"):
     title = request.GET.get("title")
     content = request.GET.get("content")
-    if util.get_entry(title, default=False):
+    if util.get_entry(title, default=False) and state == "NEW":
         return render(request, "encyclopedia/entry.html", {"entry": util.render_entry("error/COPY")})
     else:
         util.save_entry(title, content)
@@ -47,4 +47,4 @@ def save_entry(request):
 def edit_entry(request, entry_name):
     entry = util.get_entry(entry_name, default=False)
     if entry:
-        return render(request, "encyclopedia/create_entry.html", {"entry": entry, "entry_name": entry_name})
+        return render(request, "encyclopedia/create_entry.html", {"entry": entry, "entry_name": entry_name, "state": "OLD"})
