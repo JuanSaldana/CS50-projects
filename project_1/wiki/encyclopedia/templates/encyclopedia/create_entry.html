@@ -1,0 +1,51 @@
+﻿{% extends "encyclopedia/layout.html" %} } {% block title %} Edit {{entry_name}}
+{%endblock%} {% block body %}
+
+<style>
+  #EntrySubmit {
+    display: block;
+  }
+  #EntryTitle {
+    display: flex;
+    width: 80%;
+  }
+
+  #SubmitButton {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #EntryTitle {
+    overflow: hidden;
+    font-size: 30px;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+  #EntryContent {
+    overflow: hidden;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+</style>
+<form action={% url "save_entry" state%}>
+  <div id="EntryTitle">
+    <input
+      id="EntryTitle"
+      type="text"
+      name="title"
+      placeholder="Enter entry title"
+      value="{{ entry_name }}"
+    />
+    <input id="SubmitButton" class="btn" type="submit" id="EntrySubmit" value="Submit" />
+  </div>
+  <textarea
+    id="EntryContent"
+    name="content"
+    placeholder="Enter entry content"
+  >
+  {{entry}}
+</textarea>
+</form>
+{%endblock%}
