@@ -1,14 +1,25 @@
 ﻿{% extends "encyclopedia/layout.html" %} {% block title%} {{entry_name}}
-{%endblock%} {% block body %}
-
-<div class="container">
-  <div class="row">
+{%endblock%} {% block body %} {% comment %}
+<div class="container" style="width=100%">
+  <div class="row" style="display=block">
+    {% endcomment %} {% comment %}
     <div class="col-md-11">
-      <p>{{entry|safe}}</p>
+      {% endcomment %}
+      <style>
+        #EntryContent {
+          width: 80%;
+        }
+        a {
+          margin-right: auto;
+        }
+      </style>
+      <div style="display: flex">
+        <div id="EntryContent">{{entry|safe}}</div>
+        <a href="{% url 'edit_entry' entry_name%}" class="btn">Edit</a>
+      </div>
+      {% comment %}
     </div>
-    <div class="col-md-1">
-      <a href="{% url 'edit_entry' entry_name%}" class="btn">Edit</a>
-    </div>
-    {%endblock%}
+    <div class="col-md-1">{% endcomment %} {% comment %}</div>
   </div>
 </div>
+{% endcomment %} {%endblock%}
