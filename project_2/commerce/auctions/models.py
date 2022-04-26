@@ -6,11 +6,12 @@ class User(AbstractUser):
     pass
 
 
-class Listing(models.Model):
+class Auction(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     starting_bid = models.IntegerField()
-    image = models.ImageField(upload_to="images/", blank=True)
+    image_url = models.URLField(blank=True)
+    category = models.CharField(max_length=50, blank=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -26,7 +27,7 @@ class Comment(models.Model):
     comment = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"On listing: {self.listing.title}:\n{self.comment} /n Created by: {self.created_by} at {self.created_at}"
