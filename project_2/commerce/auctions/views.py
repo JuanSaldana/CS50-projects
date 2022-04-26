@@ -4,7 +4,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User
+from django.views.generic import CreateView
+
+from .models import Auction, User
 
 
 def index(request):
@@ -61,3 +63,16 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+
+class AuctionCreateView(CreateView):
+    model = Auction
+    fields = ['title', 'description', 'image_url', 'starting_bid', 'category']
+    template_name = 'auctions/create.html'
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('index')
