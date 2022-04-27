@@ -1,7 +1,62 @@
-{% extends "auctions/layout.html" %}
+{% extends "auctions/layout.html" %} {% block body %}
+<h2>Active Listings</h2>
 
-{% block body %}
-    <h2>Active Listings</h2>
-
-    TODO
+<div class="list-group-flush" style="margin: 10px">
+  {% for auction in object_list%}
+  <div class="list-group-item" style="margin: 10px">
+    <div class="container">
+      <div class="btn"><h1>{{auction.title}}</h1></div>
+      <div>
+        <span
+          class="badge badge-secondary"
+          style="font-size: 18px; margin-bottom: 10px"
+        >
+          {{auction.category}}
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <label style="color: #999">Description</label>
+          <div style="max-height: 300px; overflow: scroll">
+            {{auction.description}}
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div>
+            {% if auction.image_url%}
+            <img
+              src="{{auction.image_url}}"
+              max-height="200px"
+              width="200px"
+              height="200px"
+              class="img-thumbnail float-right"
+            />
+            {% else %}
+            <img
+              src="https://st3.depositphotos.com/1163409/37482/v/450/depositphotos_374827244-stock-illustration-vector-plate-number-404-field.jpg"
+              max-height="200px"
+              width="200px"
+              height="200px"
+              class="img-thumbnail float-right"
+            />
+            {% endif %}
+          </div>
+        </div>
+        <div>
+          <div>
+            <label style="color: #999">Starting Price</label>
+            <div>
+              <h2>$ {{auction.starting_bid}}</h2>
+            </div>
+          </div>
+          <div>
+            <label style="color: #999">Last updated</label>
+            <div>{{auction.updated_at}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
 {% endblock %}

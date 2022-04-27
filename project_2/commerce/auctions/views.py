@@ -4,10 +4,19 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.views.generic.detail import DetailView
 
 from .models import Auction, User
+
+
+class ActiveAuctionsListView(ListView):
+    model = Auction
+    fields = ['title', 'description', 'active', 'image_url']
+    template_name = "auctions/index.html"
+
+    def get_queryset(self):
+        return Auction.objects.filter(active=True)
 
 
 def index(request):
