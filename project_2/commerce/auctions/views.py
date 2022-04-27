@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from django.views.generic import CreateView
+from django.views.generic.detail import DetailView
 
 from .models import Auction, User
 
@@ -76,3 +77,9 @@ class AuctionCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('index')
+
+
+class AuctionDetailView(DetailView):
+    model = Auction
+    fields = "_all_"
+    template_name = 'auctions/detail.html'

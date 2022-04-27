@@ -1,0 +1,57 @@
+﻿{% extends "auctions/layout.html"%} {% block body %}
+
+<div class="container">
+  <div><h1>{{auction.title}}</h1></div>
+  <div>
+    <span
+      class="badge badge-secondary"
+      style="font-size: 18px; margin-bottom: 10px"
+    >
+      {{auction.category}}
+    </span>
+  </div>
+  <div class="row" style="max-height: 200px">
+    <div class="col-lg-6">
+      <label style="color: #999">Description</label>
+      <div style="height: 190px">{{auction.description}}</div>
+      <div></div>
+    </div>
+    <div class="col-lg-6">
+      <div>
+        <img
+          src="{{auction.image_url}}"
+          max-height="200px"
+          width="200px"
+          height="200px"
+          class="img-thumbnail float-right"
+        />
+      </div>
+    </div>
+    <div>
+      <div style="margin: 10px; margin-left: 0px">
+        {% if auction.active%}
+        <span class="badge badge-success" style="font-size: 20px">Active</span>
+        {%else%}
+        <span class="badge badge-secondary" style="font-size: 20px"
+          >Inactive</span
+        >
+        {%endif%}
+      </div>
+      <div>
+        <label style="color: #999">Starting Price</label>
+        <div>
+          <h2>$ {{auction.starting_bid}}</h2>
+        </div>
+      </div>
+      <div>
+        <label style="color: #999">Created at</label>
+        <div>{{auction.created_at}}</div>
+      </div>
+      <div>
+        <label style="color: #999">Last updated</label>
+        <div>{{auction.updated_at}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
