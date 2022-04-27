@@ -82,6 +82,7 @@ class AuctionCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
+        form.instance.current_bid = self.request.POST['starting_bid']
         return super().form_valid(form)
 
     def get_success_url(self):

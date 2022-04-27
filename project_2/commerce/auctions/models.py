@@ -9,12 +9,13 @@ class User(AbstractUser):
 class Auction(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    starting_bid = models.IntegerField()
+    starting_bid = models.FloatField()
     image_url = models.URLField(blank=True)
     category = models.CharField(max_length=50, blank=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    current_bid = models.FloatField(default=0)
     last_winner = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True, related_name="last_winner")
     active = models.BooleanField(default=True)
