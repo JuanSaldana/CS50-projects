@@ -5,7 +5,9 @@
   {% for auction in object_list%}
   <div class="list-group-item" style="margin: 10px">
     <div class="container">
-      <div class="btn"><h1>{{auction.title}}</h1></div>
+      <a class="btn" href="{% url 'auctions' auction.pk%}">
+        <h1>{{auction.title}}</h1>
+      </a>
       <div>
         <span
           class="badge badge-secondary"
