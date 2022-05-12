@@ -1,36 +1,33 @@
 ﻿{% extends "auctions/layout.html"%} {% block body %}
+<link
+  rel="stylesheet"
+  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+/>
+
+<style>
+  button {
+    background-color: #ffffff;
+    border: none;
+    outline: none;
+  }
+</style>
 
 <div class="container">
-  <div><h1>{{auction.title}}</h1></div>
   <div>
-    <span
-      class="badge badge-secondary"
-      style="font-size: 18px; margin-bottom: 10px"
-    >
-      {{auction.category}}
-    </span>
-    <span>
-      <span
-        class="badge"
-        style="
-          font-size: 18px;
-          margin-bottom: 10px;
-          background-color: #f251ff;
-          color: white;
-        "
-      >
-        Watchlist {% comment %} HIDE BUTTON IF ITEM IS NOT ON WATCHLIST
-        {%endcomment%}
-        <button
-          style="margin-left: 5px; margin-top: -5px"
-          type="button"
-          class="close"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">x</span>
-        </button>
+    <h1>
+      {{auction.title}} {% if request.user.is_authenticated%}
+      <span class="after">
+        {% comment %} THIS TOGGLE SHOULD BE JS, BUT OK {%endcomment%}
+        <a href="{% url 'update_watchlist' auction.pk%}">
+          {% if in_watchlist %}
+          <i class="fa fa-heart" style="font-size: 24px; color: red"></i>
+          {% else %}
+          <i class="fa fa-heart-o" style="font-size: 24px; color: red"></i>
+          {% endif %}
+        </a>
       </span>
-    </span>
+      {% endif %}
+    </h1>
   </div>
   <div class="row" style="max-height: 200px">
     <div class="col-lg-6">
@@ -57,11 +54,13 @@
     <div>
       <div style="margin: 10px; margin-left: 0px">
         {% if auction.active%}
-        <span class="badge badge-success" style="font-size: 20px">Active</span>
+        <span class="badge badge-success" style="font-size: 20px">
+          Active
+        </span>
         {%else%}
-        <span class="badge badge-secondary" style="font-size: 20px"
-          >Inactive</span
-        >
+        <span class="badge badge-secondary" style="font-size: 20px">
+          Inactive
+        </span>
         {%endif%}
       </div>
       <div>

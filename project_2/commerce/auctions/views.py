@@ -74,7 +74,6 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
-
 class AuctionCreateView(CreateView):
     model = Auction
     fields = ['title', 'description', 'image_url', 'starting_bid', 'category']
@@ -93,3 +92,21 @@ class AuctionDetailView(DetailView):
     model = Auction
     fields = "_all_"
     template_name = 'auctions/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['in_watchlist'] = self.request.user.watchlist.filter(pk=self.object.pk).exists()
+        return context
+
+def toggle_watchlist(request, pk):
+    auction = Auction.objects.get(pk=pk)
+    in_watchlist = request.user.watchlist.filter(pk=auction.pk).exists()
+    if auction.created_by == request.user:
+        return HttpResponse('You cannot watch your own auction.')
+    if in_watchlist:
+        auction.watchlist.remove(request.user)
+    else:
+        auction.watchlist.add(request.user)
+    auction.save()  # save to update the many-to-many field
+    return HttpResponseRedirect(reverse('auctions', args=(auction.pk,)))
+
