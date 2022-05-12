@@ -95,8 +95,22 @@ class AuctionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['in_watchlist'] = self.request.user.watchlist.filter(pk=self.object.pk).exists()
+        if self.request.user.is_authenticated:
+            context['in_watchlist'] = self.request.user.watchlist.filter(pk=self.object.pk).exists()
         return context
+
+def bid(request, pk):
+    auction = Auction.objects.get(pk=pk)
+    bid = float(request.POST['bid'])
+    if auction.created_by == request.user:
+        return HttpResponse('You cannot bid on your own auction.')
+    if auction.active:
+        if bid >= auction.current_bid:
+            auction.current_bid = bid
+            auction.save()
+            return HttpResponseRedirect(reverse('auctions', args=(auction.pk,)))
+        else:
+            return HttpResponseRedirect(reverse('auctions', args=(auction.pk,)))
 
 def toggle_watchlist(request, pk):
     auction = Auction.objects.get(pk=pk)

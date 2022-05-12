@@ -69,15 +69,28 @@
           <h2>$ {{auction.current_bid}}</h2>
         </div>
       </div>
+      {% if request.user.is_authenticated %}
       <div>
-        <label style="color: #999">Created at</label>
-        <div>{{auction.created_at}}</div>
+        <label style="color: #999">Place a bid</label>
+        <div>
+          <form action="{% url 'bid' auction.pk%}" method="POST">
+            {% csrf_token %} 
+            <input type="number" step="any" name="bid" placeholder="Bid" value={{auction.current_bid}} min={{auction.current_bid}}/>
+            <button type="submit" class="btn btn-primary">Bid</button>
+          </form>
+        </div>
       </div>
-      <div>
-        <label style="color: #999">Last updated</label>
-        <div>{{auction.updated_at}}</div>
+      {% endif %}
+        <div>
+          <label style="color: #999">Created at</label>
+          <div>{{auction.created_at}}</div>
+        </div>
+        <div>
+          <label style="color: #999">Last updated</label>
+          <div>{{auction.updated_at}}</div>
+        </div>
       </div>
     </div>
   </div>
+  {%endblock%}
 </div>
-{%endblock%}
