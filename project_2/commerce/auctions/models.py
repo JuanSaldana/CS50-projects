@@ -3,7 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    watchlist = models.ManyToManyField("Auction", related_name="watchlist", default=None)
 
 
 class Auction(models.Model):
@@ -16,7 +16,6 @@ class Auction(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     current_bid = models.FloatField(default=0)
-    watchlist = models.ManyToManyField(User, related_name="watchlist")
     last_winner = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True, related_name="last_winner")
     active = models.BooleanField(default=True)
