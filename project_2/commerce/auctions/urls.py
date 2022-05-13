@@ -11,4 +11,5 @@ urlpatterns = [
     path("auctions/<int:pk>/", views.AuctionDetailView.as_view(), name="auctions"),
     path("update/<int:pk>/watchlist", views.toggle_watchlist, name="update_watchlist"),
     path("update/<int:pk>/bid", views.bid, name="bid"),
+    path("update/<int:pk>/active", views.active, name="active"),
 ]

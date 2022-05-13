@@ -124,3 +124,11 @@ def toggle_watchlist(request, pk):
     auction.save()  # save to update the many-to-many field
     return HttpResponseRedirect(reverse('auctions', args=(auction.pk,)))
 
+def active(request, pk):
+    auction = Auction.objects.get(pk=pk)
+    active = bool(int(request.POST['active']))
+    print(active)
+    auction.active = active
+    auction.save()
+    return HttpResponseRedirect(reverse('auctions', args=(auction.pk,)))
+

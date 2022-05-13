@@ -33,11 +33,10 @@
     <div class="col-lg-6">
       <label style="color: #999">Description</label>
       <div style="height: 190px">{{auction.description}}</div>
-      <div></div>
     </div>
     <div class="col-lg-6">
       <div>
-        {% if auction.image_url%}
+        {% if auction.image_url %}
         <img
           src="{{auction.image_url}}"
           max-height="200px"
@@ -45,10 +44,15 @@
           height="200px"
           class="img-thumbnail float-right"
         />
-        {% else %} <img
-        src="https://st3.depositphotos.com/1163409/37482/v/450/depositphotos_374827244-stock-illustration-vector-plate-number-404-field.jpg"
-        max-height="200px" width="200px" height="200px" class="img-thumbnail
-        float-right" {%endif%}
+        {% else %}
+        <img
+          src="https://st3.depositphotos.com/1163409/37482/v/450/depositphotos_374827244-stock-illustration-vector-plate-number-404-field.jpg"
+          max-height="200px"
+          width="200px"
+          height="200px"
+          class="img-thumbnail float-right"
+        />
+        {%endif%}
       </div>
     </div>
     <div>
@@ -74,23 +78,46 @@
         <label style="color: #999">Place a bid</label>
         <div>
           <form action="{% url 'bid' auction.pk%}" method="POST">
-            {% csrf_token %} 
-            <input type="number" step="any" name="bid" placeholder="Bid" value={{auction.current_bid}} min={{auction.current_bid}}/>
+            {% csrf_token %}
+            <input
+              type="number"
+              step="any"
+              name="bid"
+              placeholder="Bid"
+              value="{{auction.current_bid}}"
+              min="{{auction.current_bid}}"
+            />
             <button type="submit" class="btn btn-primary">Bid</button>
           </form>
         </div>
       </div>
       {% endif %}
-        <div>
-          <label style="color: #999">Created at</label>
-          <div>{{auction.created_at}}</div>
-        </div>
-        <div>
-          <label style="color: #999">Last updated</label>
-          <div>{{auction.updated_at}}</div>
-        </div>
+      <div>
+        <label style="color: #999">Created at</label>
+        <div>{{auction.created_at}}</div>
       </div>
+      <div>
+        <label style="color: #999">Last updated</label>
+        <div>{{auction.updated_at}}</div>
+      </div>
+      {% if request.user.is_authenticated and request.user == auction.created_by %}
+      <div style="margin-top:10px;">
+        <form action="{% url 'active' auction.pk%}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="auction_id" value="{{auction.pk}}" />
+          {% if auction.active %}
+          <button name="active" type="submit" class="btn btn-danger" value="0">
+            Close auction
+          </button>
+          {% else %}
+          <button name="active" type="submit" class="btn btn-primary" value="1">
+            Open auction
+          </button>
+          {% endif %}
+        </form>
+      </div>
+      {% endif %}
     </div>
   </div>
-  {%endblock%}
 </div>
+{%endblock%}
