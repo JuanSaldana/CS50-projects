@@ -109,6 +109,23 @@ class WishlistListView(ListView):
     def get_queryset(self):
         return Auction.objects.filter(watchlist=self.request.user)
 
+def Categories(request):
+    categories = Auction.objects.all().values_list("category", flat=True).distinct()
+    print(categories)
+    
+    return render(request, "auctions/categories.html", context={"categories": categories})
+class CategoryListView(ListView):
+    model = Auction
+    fields = ['title', 'description', 'active', 'image_url']
+    template_name = "auctions/category.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.kwargs['category']
+        return context
+
+    def get_queryset(self):
+        return Auction.objects.filter(category=self.kwargs['category'])
 
 def bid(request, pk):
     auction = Auction.objects.get(pk=pk)
