@@ -101,6 +101,15 @@ class AuctionDetailView(DetailView):
         print(context['comments'])
         return context
 
+class WishlistListView(ListView):
+    model= Auction
+    fields = ['title', 'description', 'active', 'image_url']
+    template_name = "auctions/index.html"
+
+    def get_queryset(self):
+        return Auction.objects.filter(watchlist=self.request.user)
+
+
 def bid(request, pk):
     auction = Auction.objects.get(pk=pk)
     bid = float(request.POST['bid'])
