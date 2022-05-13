@@ -56,6 +56,11 @@
       </div>
     </div>
     <div>
+      {% if not auction.active and auction.last_winner == request.user %}
+      <div>
+        <h3>You won this auction!</h3>
+      </div>
+      {% endif %}
       <div style="margin: 10px; margin-left: 0px">
         {% if auction.active%}
         <span class="badge badge-success" style="font-size: 20px">
@@ -101,7 +106,7 @@
         <div>{{auction.updated_at}}</div>
       </div>
       {% if request.user.is_authenticated and request.user == auction.created_by %}
-      <div style="margin-top:10px;">
+      <div style="margin-top: 10px">
         <form action="{% url 'active' auction.pk%}" method="post">
           {% csrf_token %}
           <input type="hidden" name="auction_id" value="{{auction.pk}}" />

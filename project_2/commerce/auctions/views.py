@@ -107,6 +107,7 @@ def bid(request, pk):
     if auction.active:
         if bid >= auction.current_bid:
             auction.current_bid = bid
+            auction.last_winner = request.user
             auction.save()
             return HttpResponseRedirect(reverse('auctions', args=(auction.pk,)))
         else:
