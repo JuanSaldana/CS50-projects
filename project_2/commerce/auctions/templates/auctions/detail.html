@@ -29,7 +29,7 @@
       {% endif %}
     </h1>
   </div>
-  <div class="row" style="max-height: 200px">
+  <div class="row">
     <div class="col-lg-6">
       <label style="color: #999">Description</label>
       <div style="height: 190px">{{auction.description}}</div>
@@ -122,6 +122,41 @@
         </form>
       </div>
       {% endif %}
+      <div style="margin-top:20px">
+        <label style="color: #999; font-size: 20px; margin-bottom: 15px;">Comments</label>
+        {% if request.user.is_authenticated%}
+        <div>
+          <form action="{% url 'comment' auction.pk%}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="auction_id" value="{{auction.pk}}" />
+            <input type="hidden" name="user_id" value="{{request.user.pk}}" />
+            <textarea
+              class="form-control"
+              name="comment"
+              rows="3"
+              placeholder="Make a comment!"
+              value="{{comment_text}}"></textarea>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Comment</button>
+          </form>
+        </div>
+        {% endif %}
+        <div>
+          {% for comment in comments %}
+          <hr/>
+          <div>
+            <div>
+              <h6>
+                {{comment.created_by}}
+                <p style="color: #999; font-size: 10px">{{comment.created_at}}</p>
+              </h6>
+            </div>
+            <div>
+              <p>{{comment.comment}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>  
+      </div>
     </div>
   </div>
 </div>

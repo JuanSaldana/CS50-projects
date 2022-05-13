@@ -28,7 +28,7 @@ class Comment(models.Model):
     comment = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name="comments")
 
     def __str__(self):
-        return f"On listing: {self.listing.title}:\n{self.comment} /n Created by: {self.created_by} at {self.created_at}"
+        return f"On auction: {self.auction.title} \n{self.comment} /n Created by: {self.created_by} at {self.created_at}"

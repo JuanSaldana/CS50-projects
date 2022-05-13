@@ -97,6 +97,8 @@ class AuctionDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['in_watchlist'] = self.request.user.watchlist.filter(pk=self.object.pk).exists()
+        context['comments'] = self.object.comments.all()
+        print(context['comments'])
         return context
 
 def bid(request, pk):
@@ -130,6 +132,13 @@ def active(request, pk):
     active = bool(int(request.POST['active']))
     print(active)
     auction.active = active
+    auction.save()
+    return HttpResponseRedirect(reverse('auctions', args=(auction.pk,)))
+
+def comment(request, pk):
+    auction = Auction.objects.get(pk=pk)
+    comment = request.POST['comment']
+    auction.comments.create(comment=comment, created_by=request.user)
     auction.save()
     return HttpResponseRedirect(reverse('auctions', args=(auction.pk,)))
 
