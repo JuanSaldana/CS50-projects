@@ -1,0 +1,32 @@
+﻿{% extends "auctions/layout.html"%} {% block body %}
+
+<style>
+  input[type="text"] {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+
+  textarea {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 5px 0;
+    border-color: #ccc;
+  }
+</style>
+<form method="post">
+  {% csrf_token %} {% for field in form%}
+  <div class="fieldWrapper">
+    <div style="margin-top: 5px">{{field.label_tag}}</div>
+    {{field}}
+  </div>
+  {% endfor %}
+  <input
+    style="margin-top: 5px"
+    type="submit"
+    value="Submit Auction"
+    class="btn btn-primary"
+  />
+</form>
+{%endblock%}
