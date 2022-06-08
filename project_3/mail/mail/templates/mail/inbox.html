@@ -32,7 +32,10 @@
   </form>
 </div>
 
-<div id="email-view"></div>
+<div id="full-email-view">
+  <button class="btn btn-primary" id="back-button">Back</button>
+  <button class="btn btn-primary" id="reply-button">Reply</button>
+</div>
 {% endblock %} {% block script %}
 <script src="{% static 'mail/inbox.js' %}"></script>
 {% endblock %}

@@ -4,10 +4,23 @@ textarea {
 
 @keyframes grow_email{
     0% {
-        transform: scale(1.0)
+        transform: scale(1.0);
     }
     100% {
         transform: scale(1.02);
+    }
+}
+
+@keyframes show_email{
+    0% {
+        position: fixed;
+        top: 15%;
+        left: 100%;
+    }
+    100% {
+        position: fixed;
+        top: 15%;
+        left: 50%;
     }
 }
 
@@ -82,12 +95,40 @@ textarea {
     width: 100%;
 }
 
-.full-email {
+
+#full-email-view {
+    border: rgb(230, 230, 230) solid 1px;
     background-color: rgb(255, 255, 255);
+    padding: 20px;
+    padding-top: 5px;
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    width: 50%;
+    height: 90%;
+    z-index: 100;
+    animation: show_email 0.5s;
+}
+#full-email-view:visited{
+    animation: reverse show_email 0.5s;
+}
+
+#back-button {
+    position: relative;
+    left: 90%;
+    transform: scale(0.8);
+    z-index: 11;
+}
+
+.full-email {
     margin: 0px;
     padding: 0;
+    position: absolute;
+    top: 200;
+    left: 200;
     width: 100%;
-    height: 100%;
+    height: 90%;
+    z-index: 10;
 }
 
 .full-email-header {
@@ -124,9 +165,14 @@ textarea {
 
 .full-email-body {
     font: normal 20px/1.5em Arial, Helvetica, sans-serif;
+    height: 80%;
     text-overflow: wrap;
     margin: 0px;
     margin-top: 20px;
     padding: 0;
+    width: 100%;
+}
+
+.full-email-footer {
     width: 100%;
 }
