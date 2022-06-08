@@ -38,11 +38,7 @@ function send_email(event) {
   fetch("/emails", {
     method: "POST",
     body: email,
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-    });
+  }).then((response) => response.json());
 
   load_mailbox("sent");
 }
@@ -89,11 +85,9 @@ function archive_email(email_id, archived) {
 }
 
 function read_email(email_id) {
-  console.log(email_id);
   fetch(`/emails/${email_id}`)
     .then((response) => response.json())
     .then((email) => {
-      console.log(email);
       document.querySelector("#full-email-view").style.display = "none";
       document.querySelector("#full-email-view").style.display = "block";
       document.querySelector("#emails-view").style.zindex = "-10";
@@ -133,7 +127,6 @@ function read_email(email_id) {
       });
     });
 
-  console.log("Marking as read");
   fetch(`/emails/${email_id}`, {
     method: "PUT",
     body: JSON.stringify({
@@ -174,7 +167,6 @@ function load_mailbox(mailbox) {
         email_id = email.getAttribute("id");
         email.addEventListener("click", read_email.bind(null, email_id));
       }
-      console.log(result);
     });
 
   // Show the mailbox name
