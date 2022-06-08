@@ -78,6 +78,16 @@ function reply_email(email_id) {
     });
 }
 
+function archive_email(email_id, archived) {
+  fetch(`/emails/${email_id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      archived: !archived,
+    }),
+  });
+  load_mailbox("inbox");
+}
+
 function read_email(email_id) {
   console.log(email_id);
   fetch(`/emails/${email_id}`)
@@ -101,11 +111,23 @@ function read_email(email_id) {
         </div>
         <div class="full-email-body" type="box">${email.body}</div>
         <div class="full-email-footer">
-          <button class="btn btn-primary" id="reply-button">Reply</button>
+        <button class="btn btn-primary" id="reply-button">Reply</button>
+        <button class="btn btn-danger" id="archive-button">Archive</button>
         </div>
       </div>
       `;
       email_view.appendChild(back_button);
+
+      if (email.archived) {
+        document.querySelector("#archive-button").innerHTML = "Unarchive";
+      }
+      document.querySelector("#archive-button");
+
+      document
+        .querySelector("#archive-button")
+        .addEventListener("click", () => {
+          archive_email(email_id, email.archived);
+        });
       document.querySelector("#reply-button").addEventListener("click", () => {
         reply_email(email_id);
       });

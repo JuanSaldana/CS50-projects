@@ -120,6 +120,10 @@ textarea {
     z-index: 11;
 }
 
+#archive-button {
+    z-index: 11;
+}
+
 .full-email {
     margin: 0px;
     padding: 0;
