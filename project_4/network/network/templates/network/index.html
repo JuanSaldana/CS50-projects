@@ -1,5 +1,38 @@
-{% extends "network/layout.html" %}
+{% extends "network/layout.html" %} {% block body %} {% load static %}
+<div id="new-post-section">
+  <p>
+    <button
+      id="new-post-button"
+      class="btn btn-primary"
+      data-toggle="collapse"
+      data-target="#collapsableNewPost"
+    >
+      New Post
+    </button>
+  </p>
 
-{% block body %}
-    TODO
-{% endblock %}
+  <div class="collapse" id="collapsableNewPost">
+    <div class="card card-body">
+      <form action="{% url 'post' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text-area"
+            name="post-body"
+            placeholder="What do you want to say?"
+          />
+        </div>
+        <input class="btn btn-primary" type="submit" />
+      </form>
+    </div>
+  </div>
+</div>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+    richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes
+    anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
+{%endblock%} {% block script %} {%endblock%}
